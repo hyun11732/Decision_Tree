@@ -3,6 +3,7 @@ import math
 K = 3
 
 
+# Binary tree node class with has left, right node connected with useful information building the decision tree
 class Node:
     def __init__(self, value, axis):
         self.left = None
@@ -10,7 +11,7 @@ class Node:
         self.value = value
         self.axis = axis
         self.leaf = False
-
+# BFS traverse for the result tree print
     def traverse(self, root):
         current_level = [root]
         level = 0
@@ -42,10 +43,8 @@ def find_split_points(train_matrix):
         temp = list(set(column(train_matrix, i)))
         temp = sorted(temp)
         splits = []
-        # splits.append(temp[0])
         for i in range(len(temp) - 1):
             splits.append((temp[i] + temp[i + 1]) / 2)
-        # splits.append(temp[len(temp) - 1])
         split_points.append(splits)
     return split_points
 
@@ -111,8 +110,6 @@ def train_DT(train_matrix, label_vector, depth):
             D2 = [(attri[i], label_vector[i]) for i in range(len(attri)) if attri[i] > split]
             # Calculate gini
             gini = calculate_gini(D1, D2, label_vector)
-            # print(D1, split, D2)
-            # print("gini", gini, " split ", split)
             # If gini is smaller than min_gini, update it
             if gini < min_gini:
                 min_gini = gini
